@@ -1,0 +1,27 @@
+{
+  "name": "ctw",
+  "version": "1.0.1",
+  "description": "Conditional Tailwind - Create Tailwind Styles Conditionally",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc index.ts --declaration --sourceMap --outDir dist",
+    "npm": "npm run build && npm publish --access public"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  },
+  "keywords": [
+    "tailwind",
+    "conditional",
+    "classes",
+    "styles",
+    "utility"
+  ],
+  "author": "Tadej Lukek",
+  "license": "ISC"
+}
