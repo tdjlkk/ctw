@@ -1,0 +1,39 @@
+{
+  "name": "ctw",
+  "version": "2024.12.26-0",
+  "main": "dist/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "pretest": "pnpm build",
+    "test": "vitest",
+    "clean": "rm -rf dist",
+    "build": "pnpm run clean && rolldown --config rolldown.config.ts",
+    "prepublishOnly": "pnpm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "oxc-transform": "^0.44.0",
+    "rolldown": "0.15.1-commit.47f9075",
+    "unplugin-isolated-decl": "^0.10.2",
+    "vitest": "^2.1.8"
+  },
+  "homepage": "https://github.com/tdjlkk/ctw",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdjlkk/ctw.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tdjlkk/ctw/issues"
+  },
+  "author": "Tadej Lukek",
+  "license": "ISC"
+}
