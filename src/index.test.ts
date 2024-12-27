@@ -28,41 +28,59 @@ describe("build", () => {
 
 /* Function Tests */
 describe("ctw", () => {
-  it("should return a string", () => {
+  it("should return an empty string for no arguments", () => {
     expect(ctw()).toBe("");
   });
 
-  it("should return a string from a string", () => {
-    expect(ctw("foo bar baz")).toBe("foo bar baz");
+  it("should handle basic string inputs", () => {
+    expect(ctw("foo")).toBe("foo");
+    expect(ctw("foo", "bar")).toBe("foo bar");
+    expect(ctw("  foo  ", "  bar  ")).toBe("foo bar");
   });
 
-  it("should return a string from multiple strings", () => {
-    expect(ctw("foo", "bar", "baz")).toBe("foo bar baz");
+  it("should handle arrays of strings", () => {
+    expect(ctw(["foo", "bar"])).toBe("foo bar");
+    expect(ctw(["foo"], ["bar"])).toBe("foo bar");
   });
 
-  it("should return a string from an array of strings", () => {
-    expect(ctw(["foo", "bar", "baz"])).toBe("foo bar baz");
+  it("should handle falsy values", () => {
+    expect(ctw(null, undefined, false, "")).toBe("");
+    expect(ctw("foo", null, "bar", undefined)).toBe("foo bar");
   });
 
-  it("should return a string from arrays of strings", () => {
-    expect(ctw(["foo", "bar"], ["baz", "qux"])).toBe("foo bar baz qux");
-  });
-
-  it("should return a string from conditional strings", () => {
+  it("should handle simple conditional expressions", () => {
     expect(ctw(true && "foo", false && "bar")).toBe("foo");
+    expect(ctw(false && "foo", true && "bar")).toBe("bar");
   });
 
-  it("should return a string from conditional arrays of strings", () => {
-    expect(ctw(true && ["foo", "bar"], false && ["baz", "qux"])).toBe(
-      "foo bar"
-    );
+  it("should handle nested conditional arrays", () => {
+    const variant = "solid";
+    const disabled = true;
+    
+    expect(
+      ctw(
+        variant === "solid" && [
+          "bg-primary",
+          disabled && "cursor-not-allowed opacity-50"
+        ]
+      )
+    ).toBe("bg-primary cursor-not-allowed opacity-50");
   });
 
-  it("should return a string from conditional strings and arrays of strings", () => {
-    expect(ctw(true && "foo", false && ["bar", "baz"])).toBe("foo");
+  it("should handle multiple conditions in a string", () => {
+    const isLarge = true;
+    const isActive = true;
+
+    expect(
+      ctw(
+        "base-class",
+        isLarge && "text-lg",
+        isActive && "bg-blue-500 text-white font-bold"
+      )
+    ).toBe("base-class text-lg bg-blue-500 text-white font-bold");
   });
 
-  it("should return a string from multi-conditional strings and arrays of strings", () => {
-    expect(ctw(true && true && "foo", false && false && ["bar"])).toBe("foo");
+  it("should trim whitespace properly", () => {
+    expect(ctw("  foo  ", ["  bar  ", "  baz  "])).toBe("foo bar baz");
   });
 });

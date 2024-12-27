@@ -1,10 +1,10 @@
 /**
  * **CTW** - Conditional Tailwind
- * @param {...(string | string[] | boolean | null | undefined)} args
+ * @param {...(string | (string | false)[] | false | null | undefined)} args
  * @returns {string}
  */
 function ctw(
-  ...args: (string | string[] | boolean | null | undefined)[]
+  ...args: (string | (string | false)[] | false | null | undefined)[]
 ): string;
 function ctw(): string {
   let r = "",
@@ -19,11 +19,16 @@ function ctw(): string {
       s = a.trim();
       s && (r += r ? " " + s : s);
     } else if (Array.isArray(a)) {
-      for (s of a) {
-        if (typeof s === "string") {
-          s = s.trim();
-          s && (r += r ? " " + s : s);
-        }
+      if (a.length > 0) {
+        const result = ctw(...a);
+        result && (r += r ? " " + result : result);
+      }
+    } else if (typeof a === "boolean" && a) {
+      const next = arguments[i];
+      if (next) {
+        const result = ctw(next);
+        result && (r += r ? " " + result : result);
+        i++;
       }
     }
   }
