@@ -56,12 +56,12 @@ describe("ctw", () => {
   it("should handle nested conditional arrays", () => {
     const variant = "solid";
     const disabled = true;
-    
+
     expect(
       ctw(
         variant === "solid" && [
           "bg-primary",
-          disabled && "cursor-not-allowed opacity-50"
+          disabled && "cursor-not-allowed opacity-50",
         ]
       )
     ).toBe("bg-primary cursor-not-allowed opacity-50");
@@ -82,5 +82,30 @@ describe("ctw", () => {
 
   it("should trim whitespace properly", () => {
     expect(ctw("  foo  ", ["  bar  ", "  baz  "])).toBe("foo bar baz");
+  });
+
+  it("should handle number inputs", () => {
+    expect(ctw(42)).toBe("42");
+    expect(ctw("foo", 42)).toBe("foo 42");
+    expect(ctw(1, 2, 3)).toBe("1 2 3");
+    expect(ctw(3.14, "pi")).toBe("3.14 pi");
+  });
+
+  it("should handle arrays with numbers", () => {
+    expect(ctw([1, 2, 3])).toBe("1 2 3");
+    expect(ctw(["foo", 42, "bar"])).toBe("foo 42 bar");
+    expect(ctw([1.5, "point", 5])).toBe("1.5 point 5");
+    expect(ctw([true && 1, false && 2])).toBe("1");
+  });
+
+  it("should handle numbers in conditional expressions", () => {
+    const count: number = 5;
+    const zero: number = 0;
+
+    expect(ctw(count && "has-items")).toBe("has-items");
+    expect(ctw(zero && "has-items")).toBe("");
+    expect(ctw(count === 5 && "five-items")).toBe("five-items");
+    expect(ctw(count === 4 && "four-items")).toBe("");
+    expect(ctw(count > 3 && "many-items")).toBe("many-items");
   });
 });

@@ -53,3 +53,13 @@ ctw(
 );
 // => "border rounded text-neutral-100 bg-neutral-900 hover:bg-neutral-800" (if variant is "primary" and color is "default")
 ```
+
+## Tailwind CSS IntelliSense
+
+```json
+{
+  "tailwindCSS.experimental.classRegex": [
+    ["ctw\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+}
+```
