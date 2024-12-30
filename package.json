@@ -23,7 +23,7 @@
     "@types/node": "^22.10.2",
     "oxc-transform": "^0.44.0",
     "rolldown": "0.15.1",
-    "unplugin-isolated-decl": "^0.10.2",
+    "unplugin-isolated-decl": "^0.10.4",
     "vitest": "^2.1.8"
   },
   "homepage": "https://github.com/tdjlkk/ctw",
