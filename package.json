@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
-    "oxc-transform": "^0.44.0",
+    "oxc-transform": "^0.46.0",
     "rolldown": "0.15.1",
     "unplugin-isolated-decl": "^0.10.4",
     "vitest": "^2.1.8"
