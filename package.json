@@ -20,7 +20,7 @@
     "prepublishOnly": "pnpm run test"
   },
   "devDependencies": {
-    "@types/node": "^22.10.5",
+    "@types/node": "^22.10.6",
     "oxc-transform": "^0.46.0",
     "rolldown": "0.15.1",
     "unplugin-isolated-decl": "^0.10.4",
