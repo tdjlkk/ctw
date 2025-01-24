@@ -24,7 +24,7 @@
     "oxc-transform": "^0.46.0",
     "rolldown": "0.15.1",
     "unplugin-isolated-decl": "^0.10.5",
-    "vitest": "^2.1.8"
+    "vitest": "^3.0.4"
   },
   "homepage": "https://github.com/tdjlkk/ctw",
   "repository": {
